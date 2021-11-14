@@ -13,8 +13,8 @@ services:
     ports:
       - 19193:3306
     volumes:
-      - '~/Projects/partydj-systems/data:/var/lib/mysql'
-      - '~/Projects/partydj-systems/schema:/opt/vyu1-server-schema'
+      - './data:/var/lib/mysql'
+      - './schema:/opt/partydj-server-schema'
     logging:
       driver: "json-file"
       options:
@@ -32,6 +32,8 @@ services:
       options:
        max-size: "50k"
        max-file: "50"
+## docker network create partydj_network 
+
 
 networks:
   default:
