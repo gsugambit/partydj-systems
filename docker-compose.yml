@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  partydj-mysql:
+    image: mysql:8.0.21
+    restart: always
+    hostname: partydj-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: partydj
+      MYSQL_USER: partydj
+      MYSQL_PASSWORD: password
+    ports:
+      - 19193:3306
+    volumes:
+      - '~/Projects/partydj-systems/data:/var/lib/mysql'
+      - '~/Projects/partydj-systems/schema:/opt/vyu1-server-schema'
+    logging:
+      driver: "json-file"
+      options:
+       max-size: "50k"
+       max-file: "50"
+       
+  partydj-adminer:
+    image: adminer
+    hostname: partydj-adminer
+    restart: always
+    ports:
+      - 19194:8080
+    logging:
+      driver: "json-file"
+      options:
+       max-size: "50k"
+       max-file: "50"
+
+networks:
+  default:
+    external:
+      name: partydj_network
+  
